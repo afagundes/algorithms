@@ -1,8 +1,8 @@
 package structures
 
 type QNode[T any] struct {
-	value T
-	next  *QNode[T]
+	data T
+	next *QNode[T]
 }
 
 type Queue[T any] struct {
@@ -12,14 +12,16 @@ type Queue[T any] struct {
 }
 
 func NewQueue[T any]() *Queue[T] {
-	return &Queue[T]{length: 0}
+	return &Queue[T]{}
 }
 
-func (q *Queue[T]) enqueue(value T) {
-	node := &QNode[T]{value: value}
-	q.length++
+func (q *Queue[T]) Enqueue(data T) {
+	node := &QNode[T]{data: data}
+	defer func() {
+		q.length++
+	}()
 
-	if q.tail == nil {
+	if q.length == 0 {
 		q.head = node
 		q.tail = node
 		return
@@ -29,31 +31,25 @@ func (q *Queue[T]) enqueue(value T) {
 	q.tail = node
 }
 
-func (q *Queue[T]) dequeue() T {
-	if q.head == nil {
+func (q *Queue[T]) Dequeue() T {
+	if q.length == 0 {
 		var zero T
 		return zero
 	}
 
 	node := q.head
-
 	q.head = q.head.next
 	q.length--
 
-	if q.head == nil {
-		q.tail = nil
-	}
-
 	node.next = nil
-
-	return node.value
+	return node.data
 }
 
-func (q *Queue[T]) peek() T {
-	if q.head == nil {
+func (q *Queue[T]) Peek() T {
+	if q.length == 0 {
 		var zero T
 		return zero
 	}
 
-	return q.head.value
+	return q.head.data
 }

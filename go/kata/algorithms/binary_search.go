@@ -1,8 +1,6 @@
 package algorithms
 
-import (
-	"math"
-)
+import "math"
 
 func BinarySearch(arr []int, target int) bool {
 	left := 0
