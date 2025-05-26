@@ -1,0 +1,8 @@
+.DS_STORE
+
+# IntelliJ Stuff
+.idea
+*.iml
+
+# c/cpp
+cmake-build-debug
