@@ -53,3 +53,7 @@ func (q *Queue[T]) Peek() T {
 
 	return q.head.data
 }
+
+func (q *Queue[T]) Size() int {
+	return q.length
+}

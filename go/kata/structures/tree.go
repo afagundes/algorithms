@@ -1,0 +1,79 @@
+package structures
+
+type TNode struct {
+	data  int
+	left  *TNode
+	right *TNode
+}
+
+type Tree struct {
+	root *TNode
+	size int
+}
+
+func NewTree() *Tree {
+	return &Tree{}
+}
+
+func (t *Tree) Insert(value int) {
+	t.root = insertNode(t.root, value)
+	t.size++
+}
+
+func insertNode(node *TNode, value int) *TNode {
+	if node == nil {
+		return &TNode{data: value}
+	}
+
+	if value <= node.data {
+		node.left = insertNode(node.left, value)
+	} else {
+		node.right = insertNode(node.right, value)
+	}
+
+	return node
+}
+
+// AsArray performs a Depth-First search "in-order" algorithm that returns an ordered array
+func (t *Tree) AsArray() []int {
+	path := make([]int, 0, t.size)
+	t.walkInOrder(t.root, &path)
+	return path
+}
+
+func (t *Tree) walkInOrder(node *TNode, path *[]int) {
+	if node == nil {
+		return
+	}
+
+	t.walkInOrder(node.left, path)
+	*path = append(*path, node.data)
+	t.walkInOrder(node.right, path)
+}
+
+// Search performs a Breadth-First search algorithm
+func (t *Tree) Search(target int) bool {
+	if t.size == 0 {
+		return false
+	}
+
+	queue := NewQueue[*TNode]()
+	queue.Enqueue(t.root)
+
+	for queue.Size() > 0 {
+		node := queue.Dequeue()
+
+		if node == nil {
+			continue
+		}
+
+		if node.data == target {
+			return true
+		}
+
+		queue.Enqueue(node.left)
+		queue.Enqueue(node.right)
+	}
+
+	return false
+}
