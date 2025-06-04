@@ -36,3 +36,33 @@ func TestTree(t *testing.T) {
 	assert.Equal(t, false, tree.Search(11))
 	assert.Equal(t, false, tree.Search(15))
 }
+
+func TestCompare(t *testing.T) {
+	a := NewTree()
+	a.Insert(5)
+	a.Insert(3)
+	a.Insert(7)
+	a.Insert(9)
+
+	b := NewTree()
+	b.Insert(5)
+	b.Insert(3)
+	b.Insert(7)
+	b.Insert(9)
+
+	assert.Equal(t, true, Compare(a, b))
+
+	a = NewTree()
+	a.Insert(5)
+	a.Insert(3)
+	a.Insert(7)
+	a.Insert(9)
+
+	b = NewTree()
+	b.Insert(5)
+	b.Insert(3)
+	b.Insert(7)
+	b.Insert(5)
+
+	assert.Equal(t, false, Compare(a, b))
+}

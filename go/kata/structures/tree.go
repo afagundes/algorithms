@@ -77,3 +77,25 @@ func (t *Tree) Search(target int) bool {
 
 	return false
 }
+
+func Compare(a *Tree, b *Tree) bool {
+	return compareNodes(a.root, b.root)
+}
+
+// compareNodes performs a depth-first comparison
+// depth-first algorithms preserve the tree structure
+func compareNodes(a *TNode, b *TNode) bool {
+	if a == nil && b == nil {
+		return true
+	}
+
+	if a == nil || b == nil {
+		return false
+	}
+
+	if a.data != b.data {
+		return false
+	}
+
+	return compareNodes(a.left, b.left) && compareNodes(a.right, b.right)
+}
