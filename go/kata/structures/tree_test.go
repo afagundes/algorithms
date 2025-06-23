@@ -29,6 +29,13 @@ func TestTree(t *testing.T) {
 		assert.Equal(t, expected[i], value, fmt.Sprintf("want %d; got %d\n", expected[i], value))
 	}
 
+	assert.Equal(t, true, tree.SearchBreadthFirst(5))
+	assert.Equal(t, true, tree.SearchBreadthFirst(1))
+	assert.Equal(t, true, tree.SearchBreadthFirst(10))
+	assert.Equal(t, true, tree.SearchBreadthFirst(9))
+	assert.Equal(t, false, tree.SearchBreadthFirst(11))
+	assert.Equal(t, false, tree.SearchBreadthFirst(15))
+
 	assert.Equal(t, true, tree.Search(5))
 	assert.Equal(t, true, tree.Search(1))
 	assert.Equal(t, true, tree.Search(10))

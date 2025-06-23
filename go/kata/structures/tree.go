@@ -51,8 +51,8 @@ func (t *Tree) walkInOrder(node *TNode, path *[]int) {
 	t.walkInOrder(node.right, path)
 }
 
-// Search performs a Breadth-First search algorithm
-func (t *Tree) Search(target int) bool {
+// SearchBreadthFirst performs a Breadth-First search algorithm
+func (t *Tree) SearchBreadthFirst(target int) bool {
 	if t.size == 0 {
 		return false
 	}
@@ -76,6 +76,26 @@ func (t *Tree) Search(target int) bool {
 	}
 
 	return false
+}
+
+func (t *Tree) Search(target int) bool {
+	return searchNode(t.root, target)
+}
+
+func searchNode(node *TNode, target int) bool {
+	if node == nil {
+		return false
+	}
+
+	if node.data == target {
+		return true
+	}
+
+	if target <= node.data {
+		return searchNode(node.left, target)
+	} else {
+		return searchNode(node.right, target)
+	}
 }
 
 func Compare(a *Tree, b *Tree) bool {
