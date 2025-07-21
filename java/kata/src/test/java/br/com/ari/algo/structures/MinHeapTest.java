@@ -9,7 +9,6 @@ class MinHeapTest {
     @Test
     void testMinHeap() {
         var heap = new MinHeap();
-        
         assertThat(heap.getLength()).isZero();
 
         heap.insert(5);
@@ -40,7 +39,30 @@ class MinHeapTest {
         assertThat(heap.delete()).isEqualTo(69);
         assertThat(heap.delete()).isEqualTo(420);
         assertThat(heap.getLength()).isZero();
+    }
 
+    @Test
+    void testInsert() {
+        var heap = new MinHeap();
+        assertThat(heap.getLength()).isZero();
+
+        heap.insert(5);
+        heap.insert(3);
+
+        assertThat(heap.getLength()).isEqualTo(2);
+        assertThat(heap.peek()).isEqualTo(3);
+
+        heap.insert(9);
+        heap.insert(5);
+        heap.insert(4);
+        heap.insert(1);
+        heap.insert(12);
+        heap.insert(44);
+        heap.insert(7);
+        heap.insert(8);
+
+        assertThat(heap.getLength()).isEqualTo(10);
+        assertThat(heap.peek()).isEqualTo(1);
     }
 
 }

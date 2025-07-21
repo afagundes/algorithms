@@ -2,28 +2,14 @@ package br.com.ari.algo.structures;
 
 public class MinHeap {
 
-    private static final int BUFFER_SIZE = 10;
+    private static final int BUFFER_SIZE = 5;
 
     private int length;
     private int[] data;
 
     public MinHeap() {
         this.length = 0;
-        this.data = this.allocate(null);
-    }
-
-    private int[] allocate(int[] arr) {
-        if (arr == null) {
-            return new int[BUFFER_SIZE];
-        }
-
-        int growthFactor = arr.length / BUFFER_SIZE + 1;
-        int newSize = BUFFER_SIZE * growthFactor;
-
-        int[] newArr = new int[newSize];
-        System.arraycopy(arr, 0, newArr, 0, arr.length);
-
-        return  newArr;
+        this.allocate();
     }
 
     public int getLength() {
@@ -32,7 +18,7 @@ public class MinHeap {
 
     public void insert(int value) {
         if (this.length >= this.data.length) {
-            this.data = this.allocate(this.data);
+            this.allocate();
         }
 
         this.data[this.length] = value;
@@ -58,8 +44,28 @@ public class MinHeap {
         return out;
     }
 
+    public int peek() {
+        if (this.length == 0) {
+            return -1;
+        }
+
+        return this.data[0];
+    }
+
+    private void allocate() {
+        if (this.data == null || this.length == 0) {
+            this.data = new int[BUFFER_SIZE];
+        }
+
+        int growthFactor = (int) Math.floor(this.data.length * 1.5);
+        int[] newData = new int[this.data.length * growthFactor];
+
+        System.arraycopy(this.data, 0, newData, 0, this.length);
+        this.data = newData;
+    }
+
     private void heapifyUp(int index) {
-        if (index == 0) {
+        if (index <= 0) {
             return;
         }
 
