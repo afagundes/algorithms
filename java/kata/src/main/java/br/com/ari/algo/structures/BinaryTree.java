@@ -1,4 +1,4 @@
-package br.com.ari.algo.algorithms;
+package br.com.ari.algo.structures;
 
 import java.util.LinkedList;
 import java.util.Queue;
