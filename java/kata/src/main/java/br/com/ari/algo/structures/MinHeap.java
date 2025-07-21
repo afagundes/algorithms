@@ -55,10 +55,11 @@ public class MinHeap {
     private void allocate() {
         if (this.data == null || this.length == 0) {
             this.data = new int[BUFFER_SIZE];
+            return;
         }
 
-        int growthFactor = (int) Math.floor(this.data.length * 1.5);
-        int[] newData = new int[this.data.length * growthFactor];
+        int newSize = (int) Math.floor(this.data.length * 1.5);
+        int[] newData = new int[newSize];
 
         System.arraycopy(this.data, 0, newData, 0, this.length);
         this.data = newData;
