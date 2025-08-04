@@ -28,7 +28,7 @@ public class TrieWithTreeMap {
         }
     }
 
-    private Node root;
+    private final Node root;
 
     public TrieWithTreeMap() {
         this.root = new Node();
