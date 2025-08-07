@@ -37,6 +37,10 @@ public class Queue<T> {
         this.head = this.head.next;
         this.size--;
 
+        if (this.head == null) {
+            this.tail = null;
+        }
+
         return node.value;
     }
 
